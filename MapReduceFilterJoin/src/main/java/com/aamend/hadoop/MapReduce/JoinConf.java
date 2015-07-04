@@ -5,16 +5,14 @@ import java.io.IOException;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-public class WordCount {
+public class JoinConf {
 
   public static void main(String[] args) throws IOException,
       InterruptedException, ClassNotFoundException {
@@ -27,13 +25,13 @@ public class WordCount {
     Configuration conf = new Configuration(true);
 
     // Create job
-    Job job = new Job(conf, "WordCount");
-    job.setJarByClass(WordCount.class);
+    Job job = new Job(conf, "JoinConf");
+    job.setJarByClass(JoinConf.class);
 
     // Setup MapReduce
-    // job.setMapperClass(WordCountMapper.class);
-    // job.setMapperClass(Mapper1.class);
-    job.setReducerClass(WordCountReducer.class);
+    // job.setMapperClass(JoinMapper1.class);
+    // job.setMapperClass(JoinMapper2.class);
+    job.setReducerClass(JoinReducer.class);
     job.setNumReduceTasks(1);
 
     // Specify key / value
@@ -42,9 +40,9 @@ public class WordCount {
 
     // Input
     MultipleInputs.addInputPath(job, inputPath1, TextInputFormat.class,
-        WordCountMapper.class);
+        JoinMapper1.class);
     MultipleInputs.addInputPath(job, inputPath2, TextInputFormat.class,
-        Mapper1.class);
+        JoinMapper2.class);
 
     // FileInputFormat.addInputPath(job, inputPath);
     // job.setInputFormatClass(TextInputFormat.class);

@@ -7,30 +7,32 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 public class FilterMapper extends Mapper<Object, Text, Text, Text> {
 
-  private final int StateIndex = 2;
-
-  private Text word = new Text();
+  private final int StateIndex = 3;
+  String seek = "night";
+  String seperator = "<SEP>";
 
   public void map(Object key, Text line, Context context) throws IOException,
       InterruptedException {
 
-    // Splitting the record
-    String[] csv = line.toString().split("\t");
+    String[] splits = line.toString().split(seperator);
 
-    if (csv.length > 1) {
+    if (splits.length == StateIndex + 1) {
 
-      // "   apple and banana " => "apple and banana"
-      String trimmed = csv[StateIndex].trim();
+      Boolean containsSearchword =
+          splits[StateIndex].toLowerCase().contains(seek);
+
+      String Trackid = splits[StateIndex - 3];
+      String Songid = splits[StateIndex - 2];
+      String Artistname = splits[StateIndex - 1];
+      String Title = splits[StateIndex];
 
       // Filter
-      if (trimmed.matches("FR")) {
-        context.write(new Text(""), new Text(line));
-      }
+      if (containsSearchword)
+        context.write(new Text(Trackid), new Text(Artistname + "\t" + Title));
+
     }
   }
 }
-
-
 
 
 

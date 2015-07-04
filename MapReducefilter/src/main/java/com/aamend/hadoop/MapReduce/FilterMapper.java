@@ -14,6 +14,7 @@ public class FilterMapper extends Mapper<Object, Text, Text, Text> {
   public void map(Object key, Text line, Context context) throws IOException,
       InterruptedException {
 
+    // Splitting the record
     String[] csv = line.toString().split("\t");
 
     if (csv.length > 1) {
@@ -21,6 +22,7 @@ public class FilterMapper extends Mapper<Object, Text, Text, Text> {
       // "   apple and banana " => "apple and banana"
       String trimmed = csv[StateIndex].trim();
 
+      // Filter
       if (trimmed.matches("FR")) {
         context.write(new Text(""), new Text(line));
       }

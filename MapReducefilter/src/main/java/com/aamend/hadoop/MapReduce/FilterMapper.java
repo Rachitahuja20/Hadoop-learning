@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class WordCountMapper extends Mapper<Object, Text, Text, Text> {
+public class FilterMapper extends Mapper<Object, Text, Text, Text> {
 
   private final int StateIndex = 2;
 

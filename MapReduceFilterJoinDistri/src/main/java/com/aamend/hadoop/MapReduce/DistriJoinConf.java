@@ -6,16 +6,14 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.filecache.DistributedCache;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-public class WordCount {
+public class DistriJoinConf {
 
   public static void main(String[] args) throws IOException,
       InterruptedException, ClassNotFoundException {
@@ -28,13 +26,12 @@ public class WordCount {
     Configuration conf = new Configuration(true);
 
     // Create job
-    Job job = new Job(conf, "WordCount");
-    job.setJarByClass(WordCount.class);
+    Job job = new Job(conf, "DistriJoinConf");
+    job.setJarByClass(DistriJoinConf.class);
     DistributedCache.addCacheFile(inputPath1.toUri(), job.getConfiguration());
 
     // Setup MapReduce
-    job.setMapperClass(WordCountMapper.class);
-    // job.setReducerClass(WordCountReducer.class);
+    job.setMapperClass(JoinMapper.class);
     job.setNumReduceTasks(1);
 
     // Specify key / value

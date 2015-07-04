@@ -5,11 +5,11 @@ import java.io.IOException;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class Mapper1 extends Mapper<Object, Text, Text, Text> {
+public class MapperChain1 extends Mapper<Object, Text, Text, Text> {
 
   private final int StateIndex = 3;
-  String seek = "black";
-  String seperator = "\t";
+  String seek = "night";
+  String seperator = "<SEP>";
 
   public void map(Object key, Text line, Context context) throws IOException,
       InterruptedException {
@@ -18,18 +18,18 @@ public class Mapper1 extends Mapper<Object, Text, Text, Text> {
 
     if (splits.length == StateIndex + 1) {
 
+      Boolean containsSearchword =
+          splits[StateIndex].toLowerCase().contains(seek);
 
-
-      String Trackid = splits[StateIndex - 2];
+      String Trackid = splits[StateIndex - 3];
       String Artistname = splits[StateIndex - 1];
       String Title = splits[StateIndex];
 
-      Boolean containsSearchword = Title.toLowerCase().contains(seek);
-
       // Filter
       if (containsSearchword)
-        context.write(new Text(Trackid), new Text(Trackid + "\t" + Artistname
-            + "\t" + Title));
+        context
+.write(new Text(""), new Text(Trackid + "\t" + Artistname + "\t"
+            + Title));
 
     }
   }

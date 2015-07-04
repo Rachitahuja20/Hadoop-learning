@@ -3,19 +3,16 @@ package com.aamend.hadoop.MapReduce;
 import java.io.IOException;
 
 import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.filecache.DistributedCache;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
-import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-public class WordCount {
+public class JobChainConf {
 
   public static void main(String[] args) throws IOException,
       InterruptedException, ClassNotFoundException {
@@ -24,21 +21,19 @@ public class WordCount {
     Path outputDir = new Path(args[1]);
     Path outputDir1 = new Path(args[2]);
 
-
     // Create configuration
     Configuration conf = new Configuration(true);
 
     // Create job
-    Job job = new Job(conf, "WordCount");
-    job.setJarByClass(WordCount.class);
+    Job job = new Job(conf, "JobChainConf");
+    job.setJarByClass(JobChainConf.class);
 
-    Job job1 = new Job(conf, "WordCount");
-    job1.setJarByClass(WordCount.class);
+    Job job1 = new Job(conf, "JobChainConf");
+    job1.setJarByClass(JobChainConf.class);
 
     // Setup MapReduce
-    job.setMapperClass(WordCountMapper.class);
-    job1.setMapperClass(Mapper1.class);
-    // job.setReducerClass(WordCountReducer.class);
+    job.setMapperClass(MapperChain1.class);
+    job1.setMapperClass(MapperChain2.class);
     job.setNumReduceTasks(1);
 
     // Specify key / value

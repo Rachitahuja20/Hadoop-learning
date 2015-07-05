@@ -14,8 +14,7 @@ package com.aamend.hadoop.MapReduce;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.filecache.DistributedCache;
@@ -26,10 +25,11 @@ import org.apache.hadoop.mapreduce.Mapper;
 public class JoinMapper extends Mapper<Object, Text, Text, Text> {
 
   Path[] cachefiles = new Path[0]; // To store the path of lookup files
+  String seperator = "<SEP>";
+  int trackiIndex = 2;
+  int artistiIndex = 0;
 
-  // TODO use dictionary (hashmap) instead of array list
-  List<String> Artists = new ArrayList<String>();// To store the data of lookup
-                                                 // files
+  HashMap<String, String> map = new HashMap<String, String>(); // files
 
   @Override
   public void setup(Context context)
@@ -48,8 +48,12 @@ public class JoinMapper extends Mapper<Object, Text, Text, Text> {
 
       while ((cacheLine = reader.readLine()) != null) {
 
-        Artists.add(cacheLine); // Data of lookup files get stored in list
-                                // object
+        String[] Splits = cacheLine.split(seperator);
+
+        map.put(Splits[trackiIndex], Splits[artistiIndex]);// Data of lookup
+                                                           // files get stored
+                                                           // in list
+        // object
       }
       reader.close();
     } catch (IOException e) {
@@ -63,7 +67,6 @@ public class JoinMapper extends Mapper<Object, Text, Text, Text> {
   private final int trackIndex = 0;
 
   String seek = "night";
-  String seperator = "<SEP>";
 
   public void map(Object key, Text line, Context context) throws IOException,
       InterruptedException {
@@ -80,21 +83,10 @@ public class JoinMapper extends Mapper<Object, Text, Text, Text> {
       String Artistname = recordSplits[artistIndex];
       String Title = recordSplits[titleIndex];
 
-      // TODO remove this O(N) loop and use O(1) check instead
-      // O(1) means a call to method like myHashmap.Contains(foo)
-      for (String e : Artists) {
+      if (map.containsKey(Trackid)) {
+        context.write(new Text(Trackid), new Text(map.get(Trackid) + "\t"
+            + Artistname + "\t" + Title));
 
-        String[] listLine = e.toString().split(seperator);
-
-        if (listLine.length > 0) {
-          String Track = listLine[artistIndex];
-
-          if (Trackid.equals(Track)) {
-            context.write(new Text(Trackid), new Text(listLine[trackIndex]
-                + "\t" + Artistname + "\t" + Title));
-
-          }
-        }
       }
     }
   }

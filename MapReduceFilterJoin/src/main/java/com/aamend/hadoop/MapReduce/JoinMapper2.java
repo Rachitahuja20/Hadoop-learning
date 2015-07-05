@@ -8,18 +8,25 @@ import org.apache.hadoop.mapreduce.Mapper;
 public class JoinMapper2 extends Mapper<Object, Text, Text, Text> {
 
   private final int StateIndex = 3;
+  private final int artistIndex = 0;
+  private final int trackIndex = 2;
+
   String seek = "night";
   String seperator = "<SEP>";
 
   public void map(Object key, Text line, Context context) throws IOException,
       InterruptedException {
 
-    String[] splits = line.toString().split(seperator);
+    if (line == null) {
+      return;
+    }
 
-    if (splits.length == StateIndex + 1) {
+    String[] recordSplits = line.toString().split(seperator);
 
-      String Artid1 = splits[StateIndex - 3];
-      String Trackid = splits[StateIndex - 1];
+    if (recordSplits.length == StateIndex + 1) {
+
+      String Artid1 = recordSplits[artistIndex];
+      String Trackid = recordSplits[trackIndex];
 
       context.write(new Text(Trackid), new Text(Artid1));
 

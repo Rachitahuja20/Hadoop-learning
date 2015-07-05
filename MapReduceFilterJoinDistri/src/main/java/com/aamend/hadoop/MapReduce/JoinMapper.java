@@ -91,8 +91,7 @@ public class JoinMapper extends Mapper<Object, Text, Text, Text> {
 
           if (Trackid.equals(Track)) {
             context.write(new Text(Trackid), new Text(listLine[trackIndex]
-                + "\t"
-                + Artistname + "\t" + Title));
+                + "\t" + Artistname + "\t" + Title));
 
           }
         }

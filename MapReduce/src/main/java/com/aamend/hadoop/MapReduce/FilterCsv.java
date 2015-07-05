@@ -11,8 +11,6 @@ public class FilterCsv extends Mapper<Object, Text, Text, Text> {
 
   private final int StateIndex = 1;
 
-  private Text word = new Text();
-
   public void map(Object key, Text line, Context context) throws IOException,
       InterruptedException {
 
@@ -33,7 +31,7 @@ public class FilterCsv extends Mapper<Object, Text, Text, Text> {
       //
       // String trimmed = new String(t);
 
-      String bytes = trimmed + "   ";
+      // String bytes = trimmed + "   ";
 
       // trimmed.getBytes("US-ASCII")
       // for (Byte b : new String(bar)

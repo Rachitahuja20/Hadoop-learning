@@ -63,6 +63,7 @@ public class JobChainConf {
       hdfs.delete(outputDir, true);
 
     // Execute job
+    @SuppressWarnings("unused")
     int code = job.waitForCompletion(true) ? 0 : 1;
     int code1 = job1.waitForCompletion(true) ? 0 : 1;
     System.exit(code1);

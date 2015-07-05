@@ -1,3 +1,11 @@
+/*
+Job Chaining: Filter records based on keyword A for Job A and 
+then take that output as input for Job B
+and filter for keyword B.
+
+Job A -> Filter on keyword ("night")
+Job B -> Filter on keyword ("black")
+ */
 package com.aamend.hadoop.MapReduce;
 
 import java.io.IOException;
@@ -7,20 +15,27 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 public class MapperChain2 extends Mapper<Object, Text, Text, Text> {
 
-  private final int StateIndex = 3;
+  private final int trackidIndex = 0;
+  private final int artistIndex = 2;
+  private final int titleIndex = 3;
+
   String seek = "black";
   String seperator = "\t";
 
   public void map(Object key, Text line, Context context) throws IOException,
       InterruptedException {
 
-    String[] splits = line.toString().split(seperator);
+    if (line == null) {
+      return;
+    }
 
-    if (splits.length == StateIndex + 1) {
+    String[] recordSplits = line.toString().split(seperator);
 
-      String Trackid = splits[StateIndex - 2];
-      String Artistname = splits[StateIndex - 1];
-      String Title = splits[StateIndex];
+    if (recordSplits.length == titleIndex + 1) {
+
+      String Trackid = recordSplits[trackidIndex];
+      String Artistname = recordSplits[artistIndex];
+      String Title = recordSplits[titleIndex];
 
       Boolean containsSearchword = Title.toLowerCase().contains(seek);
 

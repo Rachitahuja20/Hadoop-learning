@@ -28,6 +28,8 @@ public class DistriJoinConf {
     // Create job
     Job job = new Job(conf, "DistriJoinConf");
     job.setJarByClass(DistriJoinConf.class);
+
+    // For Distributed cache
     DistributedCache.addCacheFile(inputPath1.toUri(), job.getConfiguration());
 
     // Setup MapReduce

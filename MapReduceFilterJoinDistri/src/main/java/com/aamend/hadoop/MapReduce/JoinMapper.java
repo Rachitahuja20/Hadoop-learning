@@ -1,3 +1,14 @@
+/*
+ * 
+    Perform Join using MR using Distributed Cache
+    Track file | artist file
+
+  I/P : A track file and an artist file as distributed cache.
+  O/P : filter the record on the basis of seek and then output,
+        Track_id, artist id and title of song
+ *
+ */
+
 package com.aamend.hadoop.MapReduce;
 
 import java.io.BufferedReader;
@@ -31,43 +42,52 @@ public class JoinMapper extends Mapper<Object, Text, Text, Text> {
       BufferedReader reader =
           new BufferedReader(new FileReader(cachefiles[0].toString()));
 
-      String line1;
+      String cacheLine;
 
-      while ((line1 = reader.readLine()) != null) {
+      while ((cacheLine = reader.readLine()) != null) {
 
-        Artists.add(line1); // Data of lookup files get stored in list object
+        Artists.add(cacheLine); // Data of lookup files get stored in list
+                                // object
       }
-
+      reader.close();
     } catch (IOException e) {
       e.printStackTrace();
     }
 
   }
 
-  private final int StateIndex = 3;
+  private final int titleIndex = 3;
+  private final int artistIndex = 2;
+  private final int trackIndex = 0;
+
   String seek = "night";
   String seperator = "<SEP>";
 
   public void map(Object key, Text line, Context context) throws IOException,
       InterruptedException {
 
-    String[] splits = line.toString().split(seperator);
+    if (line == null) {
+      return;
+    }
 
-    if (splits.length == StateIndex + 1) {
+    String[] recordSplits = line.toString().split(seperator);
 
-      String Trackid = splits[StateIndex - 3];
-      String Artistname = splits[StateIndex - 1];
-      String Title = splits[StateIndex];
+    if (recordSplits.length == titleIndex + 1) {
+
+      String Trackid = recordSplits[trackIndex];
+      String Artistname = recordSplits[artistIndex];
+      String Title = recordSplits[titleIndex];
 
       for (String e : Artists) {
 
         String[] listLine = e.toString().split(seperator);
 
         if (listLine.length > 0) {
-          String Track = listLine[2];
+          String Track = listLine[artistIndex];
 
           if (Trackid.equals(Track)) {
-            context.write(new Text(Trackid), new Text(listLine[0] + "\t"
+            context.write(new Text(Trackid), new Text(listLine[trackIndex]
+                + "\t"
                 + Artistname + "\t" + Title));
 
           }

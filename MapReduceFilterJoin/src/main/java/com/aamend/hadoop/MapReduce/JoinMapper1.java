@@ -1,10 +1,11 @@
 /*
- * Perform Join using MR
-  Track file | artist file
+ * 
+    Perform Join using MR
+    Track file | artist file
 
-I/P : A track file and an artist file
-O/P : filter the record on the basis of seek and then output,
-      Track_id, artist id and title of song
+  I/P : A track file and an artist file
+  O/P : filter the record on the basis of seek and then output,
+        Track_id, artist id and title of song
  *
  */
 

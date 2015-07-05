@@ -3,7 +3,7 @@
     Perform Join using MR using Distributed Cache
     Track file | artist file
 
-  I/P : A track file and an artist file as distributed cache.
+  I/P : A track file and an artist file as distributed cache (Smaller file as cache).
   O/P : filter the record on the basis of seek and then output,
         Track_id, artist id and title of song
  *
@@ -26,6 +26,8 @@ import org.apache.hadoop.mapreduce.Mapper;
 public class JoinMapper extends Mapper<Object, Text, Text, Text> {
 
   Path[] cachefiles = new Path[0]; // To store the path of lookup files
+
+  // TODO use dictionary (hashmap) instead of array list
   List<String> Artists = new ArrayList<String>();// To store the data of lookup
                                                  // files
 
@@ -78,6 +80,8 @@ public class JoinMapper extends Mapper<Object, Text, Text, Text> {
       String Artistname = recordSplits[artistIndex];
       String Title = recordSplits[titleIndex];
 
+      // TODO remove this O(N) loop and use O(1) check instead
+      // O(1) means a call to method like myHashmap.Contains(foo)
       for (String e : Artists) {
 
         String[] listLine = e.toString().split(seperator);

@@ -7,7 +7,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class Mapreduce_jobMapper extends
+public class MapperTemp extends
     Mapper<LongWritable, Text, Text, IntWritable> {
 
   private static final int Lost = 9999;

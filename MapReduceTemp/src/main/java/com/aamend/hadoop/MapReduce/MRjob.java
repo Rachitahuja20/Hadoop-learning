@@ -34,8 +34,8 @@ public class MRjob {
     job.setJarByClass(MRjob.class);
 
     // Setup MapReduce
-    job.setMapperClass(Mapreduce_jobMapper.class);
-    job.setReducerClass(Mapreduce_jobReducer.class);
+    job.setMapperClass(MapperTemp.class);
+    job.setReducerClass(ReducerTemp.class);
     job.setNumReduceTasks(1);
 
 

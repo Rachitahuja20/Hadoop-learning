@@ -16,3 +16,33 @@ I/P => usera - google; usera - google ; userb - wiki ; usera - wiki
 O/P => google - 1; wiki - 2
 
 # Join using distributed cache
+Perform a join on two tables using a distributed cache approach.
+
+# Temperature Exercise 
+To find the Maximum temperature for the years from the weather data set. 
+I/P (Example) =>  
+1942	128	1
+1940	136	1
+1956	124	1
+1946	128	1
+1940	136	1
+1956	154	1
+1942	138	1
+1940	116	1
+1954	124	1
+1942	128	1
+1945	152	1
+1956	124	1
+1941	111	1
+1940	136	1
+1961	164	1
+
+O/P =>
+1940	136
+1941	111
+1942	138
+1945	152
+1946	128
+1954	124
+1956	154
+1961	164

@@ -20,7 +20,6 @@ public class MRjob1 {
     if (args.length != 2) {
       System.err.println("Usage : MaxTemperature<input path> <output path>");
       System.exit(-1);
-
     }
 
     Path inputPath = new Path(args[0]);

@@ -32,6 +32,9 @@ public class MapperTemp extends Mapper<LongWritable, Text, Text, IntWritable> {
       airTemperature = Integer.parseInt(recordSplits[tempIndex]);
 
       String quality = recordSplits[qualityIndex];
+
+      // Checking the record for its quality and irregular data
+
       if (airTemperature != Lost && quality.matches("[01459]")) {
         context.write(new Text(Year), new IntWritable(airTemperature));
       }

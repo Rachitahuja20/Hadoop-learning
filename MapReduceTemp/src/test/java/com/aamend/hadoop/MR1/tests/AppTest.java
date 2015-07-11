@@ -1,4 +1,4 @@
-package com.aamend.hadoop.MapReduce;
+package com.aamend.hadoop.MR1.tests;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

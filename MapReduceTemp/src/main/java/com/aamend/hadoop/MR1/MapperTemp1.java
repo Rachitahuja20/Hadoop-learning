@@ -11,12 +11,13 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class MapperTemp extends
+public class MapperTemp1 extends
     Mapper<LongWritable, Text, Text, DoubleWritable> {
 
   int yearIndex = 0;
   int expectLen = 7;
   int tempIndex = 2;
+  String Seperator = " +";
 
   public void map(LongWritable key, Text value, Context context)
       throws IOException, InterruptedException {
@@ -27,7 +28,7 @@ public class MapperTemp extends
       return;
     }
 
-    String[] recordSplits = Line.split(" ", -1);
+    String[] recordSplits = Line.trim().split(Seperator);
 
     if (recordSplits.length == expectLen) {
 

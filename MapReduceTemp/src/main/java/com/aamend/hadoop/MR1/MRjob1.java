@@ -14,9 +14,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.log4j.Logger;
 
-public class MRjob {
-
-  private static Logger logger = Logger.getLogger(MRjob.class);
+public class MRjob1 {
 
   public static void main(String[] args) throws IOException,
       InterruptedException, ClassNotFoundException {
@@ -25,7 +23,6 @@ public class MRjob {
       System.exit(-1);
 
     }
-    logger.info("sdaasdaad!!!!!!!!!");
 
     Path inputPath = new Path(args[0]);
     Path outputDir = new Path(args[1]);
@@ -34,12 +31,12 @@ public class MRjob {
     Configuration conf = new Configuration(true);
 
     // Create job
-    Job job = new Job(conf, "MRjob");
-    job.setJarByClass(MRjob.class);
+    Job job = new Job(conf, "MRjob1");
+    job.setJarByClass(MRjob1.class);
 
     // Setup MapReduce
-    job.setMapperClass(MapperTemp.class);
-    job.setReducerClass(ReducerTemp.class);
+    job.setMapperClass(MapperTemp1.class);
+    job.setReducerClass(ReducerTemp1.class);
     job.setNumReduceTasks(1);
 
     // Specify key / value

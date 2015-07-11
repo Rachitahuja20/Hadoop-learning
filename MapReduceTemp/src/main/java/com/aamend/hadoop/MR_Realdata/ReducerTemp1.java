@@ -1,4 +1,4 @@
-package com.aamend.hadoop.MR1;
+package com.aamend.hadoop.MR_Realdata;
 
 import java.io.IOException;
 

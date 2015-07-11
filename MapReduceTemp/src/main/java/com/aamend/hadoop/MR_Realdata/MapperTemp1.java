@@ -1,4 +1,4 @@
-package com.aamend.hadoop.MR1;
+package com.aamend.hadoop.MR_Realdata;
 
 /*
  * To find the Maximum temperature for the years from the weather data set.

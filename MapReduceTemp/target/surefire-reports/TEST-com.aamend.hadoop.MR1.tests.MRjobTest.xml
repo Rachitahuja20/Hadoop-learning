@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.75" errors="0" skipped="0" tests="5" name="com.aamend.hadoop.MR1.tests.MRjobTest">
+<testsuite failures="0" time="1.288" errors="0" skipped="0" tests="5" name="com.aamend.hadoop.MR1.tests.MRjobTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Libraries"/>
@@ -27,7 +27,7 @@
 "/>
     <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="os.name" value="Mac OS X"/>
-    <property name="classworlds.conf" value="/Users/ahuja/Documents/workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf4798159171236954574.tmp"/>
+    <property name="classworlds.conf" value="/Users/ahuja/Documents/workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf6050528634366973639.tmp"/>
     <property name="sun.jnu.encoding" value="MacRoman"/>
     <property name="java.library.path" value=".:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -65,9 +65,9 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.53" classname="com.aamend.hadoop.MR1.tests.MRjobTest" name="testMapper_normalrec_normalmap"/>
-  <testcase time="0.052" classname="com.aamend.hadoop.MR1.tests.MRjobTest" name="testMapper_normalrec_normal"/>
-  <testcase time="0.042" classname="com.aamend.hadoop.MR1.tests.MRjobTest" name="testMapper_malformeddata_validmap"/>
-  <testcase time="0.076" classname="com.aamend.hadoop.MR1.tests.MRjobTest" name="testReducer"/>
-  <testcase time="0.05" classname="com.aamend.hadoop.MR1.tests.MRjobTest" name="testMapReduce"/>
+  <testcase time="0.998" classname="com.aamend.hadoop.MR1.tests.MRjobTest" name="testMapper_normalrec_normalmap"/>
+  <testcase time="0.054" classname="com.aamend.hadoop.MR1.tests.MRjobTest" name="testMapper_normalrec_normal"/>
+  <testcase time="0.043" classname="com.aamend.hadoop.MR1.tests.MRjobTest" name="testMapper_malformeddata_validmap"/>
+  <testcase time="0.132" classname="com.aamend.hadoop.MR1.tests.MRjobTest" name="testReducer_validinput_validoutput"/>
+  <testcase time="0.061" classname="com.aamend.hadoop.MR1.tests.MRjobTest" name="testMapReduce_validinput_validoutput"/>
 </testsuite>

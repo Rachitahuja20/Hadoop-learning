@@ -1,4 +1,4 @@
-package com.aamend.hadoop.MR1;
+package com.aamend.hadoop.MR_Realdata;
 
 import java.io.IOException;
 
@@ -12,7 +12,6 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
-import org.apache.log4j.Logger;
 
 public class MRjob1 {
 

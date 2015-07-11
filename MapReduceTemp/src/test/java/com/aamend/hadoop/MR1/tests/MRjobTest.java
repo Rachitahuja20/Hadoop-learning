@@ -13,8 +13,8 @@ import org.apache.hadoop.mrunit.mapreduce.ReduceDriver;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.aamend.hadoop.MR1.MapperTemp1;
-import com.aamend.hadoop.MR1.ReducerTemp1;
+import com.aamend.hadoop.MR_Realdata.MapperTemp1;
+import com.aamend.hadoop.MR_Realdata.ReducerTemp1;
 
 
 public class MRjobTest {

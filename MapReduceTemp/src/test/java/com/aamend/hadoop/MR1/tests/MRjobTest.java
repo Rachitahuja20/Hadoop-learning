@@ -13,7 +13,7 @@ import org.apache.hadoop.mrunit.mapreduce.ReduceDriver;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.aamend.hadoop.MR_Realdata.MapperTemp1;
+import com.aamend.hadoop.MR_Realdata.FilterMapper;
 import com.aamend.hadoop.MR_Realdata.ReducerTemp1;
 
 
@@ -24,7 +24,7 @@ public class MRjobTest {
 
   @Before
   public void setUp() {
-    MapperTemp1 mapper = new MapperTemp1();
+    FilterMapper mapper = new FilterMapper();
     ReducerTemp1 reducer = new ReducerTemp1();
     mapDriver = MapDriver.newMapDriver(mapper);
     reduceDriver = ReduceDriver.newReduceDriver(reducer);

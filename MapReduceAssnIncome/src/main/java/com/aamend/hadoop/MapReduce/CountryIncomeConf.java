@@ -1,4 +1,4 @@
-package com.aamend.hadoop.MR_Realdata;
+package com.aamend.hadoop.MapReduce;
 
 import java.io.IOException;
 
@@ -13,14 +13,10 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-public class MRjob1 {
+public class CountryIncomeConf {
 
   public static void main(String[] args) throws IOException,
       InterruptedException, ClassNotFoundException {
-    if (args.length != 2) {
-      System.err.println("Usage : MaxTemperature<input path> <output path>");
-      System.exit(-1);
-    }
 
     Path inputPath = new Path(args[0]);
     Path outputDir = new Path(args[1]);
@@ -29,12 +25,11 @@ public class MRjob1 {
     Configuration conf = new Configuration(true);
 
     // Create job
-    Job job = new Job(conf, "MRjob1");
-    job.setJarByClass(MRjob1.class);
+    Job job = new Job(conf, "CountryIncomeConf");
+    job.setJarByClass(CountryIncomeConf.class);
 
     // Setup MapReduce
-    job.setMapperClass(FilterMapper.class);
-    job.setReducerClass(ReducerTemp1.class);
+    job.setMapperClass(CountryIncomeMapper.class);
     job.setNumReduceTasks(1);
 
     // Specify key / value

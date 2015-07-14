@@ -11,7 +11,7 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-public class MapperTemp1 extends
+public class FilterMapper extends
     Mapper<LongWritable, Text, Text, DoubleWritable> {
 
   int yearIndex = 0;

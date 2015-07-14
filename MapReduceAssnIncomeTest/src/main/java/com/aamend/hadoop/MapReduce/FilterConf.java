@@ -6,6 +6,8 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.DoubleWritable;
+import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -13,7 +15,9 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-public class CountryIncomeConf {
+import com.aamend.hadoop.MapReduce.ClickKey.GroupComparator;
+
+public class FilterConf {
 
   public static void main(String[] args) throws IOException,
       InterruptedException, ClassNotFoundException {
@@ -25,8 +29,8 @@ public class CountryIncomeConf {
     Configuration conf = new Configuration(true);
 
     // Create job
-    Job job = new Job(conf, "CountryIncomeConf");
-    job.setJarByClass(CountryIncomeConf.class);
+    Job job = new Job(conf, "FilterConf");
+    job.setJarByClass(FilterConf.class);
 
     // Setup MapReduce
     job.setMapperClass(FilterMapper.class);
@@ -39,6 +43,12 @@ public class CountryIncomeConf {
     // Input
     FileInputFormat.addInputPath(job, inputPath);
     job.setInputFormatClass(TextInputFormat.class);
+
+    job.setGroupingComparatorClass(GroupComparator.class);
+    job.setPartitionerClass(ClickKeyPartitioner.class);
+
+    job.setMapOutputKeyClass(ClickKey.class);
+    job.setMapOutputValueClass(NullWritable.class);
 
     // Output
     FileOutputFormat.setOutputPath(job, outputDir);

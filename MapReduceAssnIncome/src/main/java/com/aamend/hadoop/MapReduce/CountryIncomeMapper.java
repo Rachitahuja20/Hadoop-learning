@@ -41,10 +41,14 @@ public class CountryIncomeMapper extends
 
         String countryName = recordSplits[countryIndex];
         try {
+
           double income = Double.parseDouble(recordSplits[incomeIndex]);
+
           context.write(new Text(countryName), new DoubleWritable(income));
+
         } catch (NumberFormatException nfe) {
-          logger.info("The value of income is of wrong format.");
+
+          logger.info("The value of income is in wrong format.");
 
           return;
         }

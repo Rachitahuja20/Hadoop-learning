@@ -12,8 +12,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.log4j.Logger;
 
-public class FilterMapper extends
-    Mapper<Object, Text, Text, DoubleWritable> {
+public class FilterMapper extends Mapper<Object, Text, Text, DoubleWritable> {
 
   private Logger logger = Logger.getLogger("FilterMapper");
 
@@ -21,7 +20,6 @@ public class FilterMapper extends
   private final int countryIndex = 0;
   private final int lenIndex = 58;
 
-  String seek = "Adjusted net national income (current US$)";
   String seperator = ",";
 
   public void map(Object key, Text line, Context context) throws IOException,
@@ -48,7 +46,7 @@ public class FilterMapper extends
 
         } catch (NumberFormatException nfe) {
 
-          logger.info("The value of income is in wrong format.");
+          logger.info("The value of income is in wrong format." + countryName);
 
           return;
         }

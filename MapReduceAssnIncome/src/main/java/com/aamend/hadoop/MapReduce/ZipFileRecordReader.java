@@ -1,13 +1,5 @@
 package com.aamend.hadoop.MapReduce;
 
-import java.io.IOException;
-
-import org.apache.hadoop.io.BytesWritable;
-import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.InputSplit;
-import org.apache.hadoop.mapreduce.RecordReader;
-import org.apache.hadoop.mapreduce.TaskAttemptContext;
-
 import java.io.ByteArrayOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
@@ -31,7 +23,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileSplit;
  * and hands them over to the Mapper. The "key" is the decompressed file name,
  * the "value" is the file contents.
  */
-public class ZipFileRecordReader extends RecordReader<Text, BytesWritable> {
+public class ZipFileRecordReader extends RecordReader<Text, Text> {
   /** InputStream used to read the ZIP file from the FileSystem */
   private FSDataInputStream fsin;
 
@@ -42,7 +34,7 @@ public class ZipFileRecordReader extends RecordReader<Text, BytesWritable> {
   private Text currentKey;
 
   /** Uncompressed file contents */
-  private BytesWritable currentValue;
+  private Text currentValue;
 
   /** Used to indicate progress */
   private boolean isFinished = false;
@@ -62,7 +54,7 @@ public class ZipFileRecordReader extends RecordReader<Text, BytesWritable> {
     // Open the stream
     fsin = fs.open(path);
     zip = new ZipInputStream(fsin);
-  }
+    }
 
   /**
    * This is where the magic happens, each ZipEntry is decompressed and readied
@@ -112,9 +104,9 @@ public class ZipFileRecordReader extends RecordReader<Text, BytesWritable> {
     zip.closeEntry();
 
     // Uncompressed contents
-    currentValue = new BytesWritable(bos.toByteArray());
+    currentValue = new Text(bos.toByteArray());
     return true;
-  }
+    }
 
   /**
    * Rather than calculating progress, we just keep it simple
@@ -122,7 +114,7 @@ public class ZipFileRecordReader extends RecordReader<Text, BytesWritable> {
   @Override
   public float getProgress() throws IOException, InterruptedException {
     return isFinished ? 1 : 0;
-  }
+    }
 
   /**
    * Returns the current key (name of the zipped file)
@@ -130,16 +122,16 @@ public class ZipFileRecordReader extends RecordReader<Text, BytesWritable> {
   @Override
   public Text getCurrentKey() throws IOException, InterruptedException {
     return currentKey;
-  }
+    }
 
   /**
    * Returns the current value (contents of the zipped file)
    */
   @Override
-  public BytesWritable getCurrentValue() throws IOException,
+  public Text getCurrentValue() throws IOException,
       InterruptedException {
     return currentValue;
-  }
+    }
 
   /**
    * Close quietly, ignoring any exceptions
@@ -154,5 +146,5 @@ public class ZipFileRecordReader extends RecordReader<Text, BytesWritable> {
       fsin.close();
     } catch (Exception ignore) {
     }
-  }
+    }
 }

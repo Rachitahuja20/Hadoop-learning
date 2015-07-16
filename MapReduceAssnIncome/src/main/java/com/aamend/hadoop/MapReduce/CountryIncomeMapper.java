@@ -12,7 +12,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.log4j.Logger;
 
-public class FilterMapper extends Mapper<Object, Text, Text, DoubleWritable> {
+public class CountryIncomeMapper extends Mapper<Object, Text, Text, DoubleWritable> {
 
   private Logger logger = Logger.getLogger("FilterMapper");
 

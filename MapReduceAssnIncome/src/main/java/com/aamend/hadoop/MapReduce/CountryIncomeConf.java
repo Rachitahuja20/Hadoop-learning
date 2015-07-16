@@ -60,7 +60,7 @@ public class CountryIncomeConf {
     // }
 
     // Setup MapReduce
-    job.setMapperClass(FilterMapper.class);
+    job.setMapperClass(CountryIncomeMapper.class);
     job.setNumReduceTasks(1);
 
     // Specify key / value

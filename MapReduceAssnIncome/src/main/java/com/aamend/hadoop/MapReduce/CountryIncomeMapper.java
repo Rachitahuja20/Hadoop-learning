@@ -1,7 +1,9 @@
 /*
-MR job for Filter the records for the songs with title containing "night"
+MR job for Filter the records for the country name and its adjusted net national income per capita (current US$)
 
-O/P : Output record which has only records with title containing keyword.
+O/P : Output record with country name and its adjusted net national income per capita (current US$). 
+Note: The input file should be in foo.*format*.gz format.
+
  */
 package com.aamend.hadoop.MapReduce;
 
@@ -25,8 +27,9 @@ public class CountryIncomeMapper extends Mapper<Object, Text, Text, DoubleWritab
   public void map(Object key, Text line, Context context) throws IOException,
       InterruptedException {
 
-    if (line == null) {
+    if (line == null | !!line.toString().isEmpty()) {
       logger.info("null found.");
+      // context.getCounter(COUNTERS.ERROR_COUNT).increment(1);
       return;
     }
     if (line.toString().contains(
@@ -47,7 +50,7 @@ public class CountryIncomeMapper extends Mapper<Object, Text, Text, DoubleWritab
         } catch (NumberFormatException nfe) {
 
           logger.info("The value of income is in wrong format." + countryName);
-
+          // context.getCounter(COUNTERS.MISSING_FIELDS_RECORD_COUNT).increment(1);
           return;
         }
 

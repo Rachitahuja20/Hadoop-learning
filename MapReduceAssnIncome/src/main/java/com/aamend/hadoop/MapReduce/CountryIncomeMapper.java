@@ -1,7 +1,7 @@
 /*
-MR job for Filter the records for the country name and its adjusted net national income per capita (current US$)
+MR job to Filter the records for the country name and its adjusted net national income per capita (current US$) for the year 2010.
 
-O/P : Output record with country name and its adjusted net national income per capita (current US$). 
+O/P : Output record with country name and its adjusted net national income per capita (current US$) for the year 2010. 
 Note: The input file should be in foo.*format*.gz format.
 
  */

@@ -46,3 +46,10 @@ O/P =>
 1954	124
 1956	154
 1961	164
+
+#Map reduce Assignment by Oleksii
+
+MR job to Filter the records for the country name and its adjusted net national income per capita (current US$) for the year 2010.
+
+O/P : Output record with country name and its adjusted net national income per capita (current US$) for the year 2010. 
+Note: The input file should be in foo.*format*.gz format.

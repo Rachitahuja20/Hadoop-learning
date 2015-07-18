@@ -56,5 +56,7 @@ Note: The input file should be in foo.*format*.gz format.
 
 #Map reduce Assignment by Sandeep 
 MR job to parse an APache Log file and count the number of time a status code appears. 
+  
   <i>Using a Counter
+  
   <i>Using a Reducer

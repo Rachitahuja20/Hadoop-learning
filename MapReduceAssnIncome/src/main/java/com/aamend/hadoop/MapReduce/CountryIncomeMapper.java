@@ -29,7 +29,7 @@ public class CountryIncomeMapper extends Mapper<Object, Text, Text, DoubleWritab
 
     if (line == null | !!line.toString().isEmpty()) {
       logger.info("null found.");
-      // context.getCounter(COUNTERS.ERROR_COUNT).increment(1);
+      context.getCounter(COUNTERS.NULL_OR_EMPTY).increment(1);
       return;
     }
     if (line.toString().contains(
@@ -49,8 +49,8 @@ public class CountryIncomeMapper extends Mapper<Object, Text, Text, DoubleWritab
 
         } catch (NumberFormatException nfe) {
 
-          logger.info("The value of income is in wrong format." + countryName);
-          // context.getCounter(COUNTERS.MISSING_FIELDS_RECORD_COUNT).increment(1);
+          logger.info("The value of income is in wrong format. " + countryName);
+          context.getCounter(COUNTERS.MISSING_FIELDS_RECORD_COUNT).increment(1);
           return;
         }
 

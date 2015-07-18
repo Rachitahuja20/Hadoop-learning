@@ -13,7 +13,7 @@ import org.apache.hadoop.io.IOUtils;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.compress.CompressionCodec;
 import org.apache.hadoop.io.compress.CompressionCodecFactory;
-
+import org.apache.hadoop.mapreduce.Counters;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
@@ -32,6 +32,7 @@ public class CountryIncomeConf {
     Configuration conf = new Configuration(true);
 
     // Create job
+    @SuppressWarnings("deprecation")
     Job job = new Job(conf, "CountryIncomeConf");
     job.setJarByClass(CountryIncomeConf.class);
 
@@ -84,11 +85,12 @@ public class CountryIncomeConf {
     // Execute job
     int code = job.waitForCompletion(true) ? 0 : 1;
 
-    // Counters counters = job.getCounters();
-    // Counter counter =
-    // counters.findCounter(COUNTERS.ERROR_COUNT);
+    // Counter finding and displaying
+    Counters counters = job.getCounters();
 
-    // System.out.println("Error Counter = " + counter.getValue());
+    System.out.printf("Missing Fields: %d, Error Count: %d\n", counters
+        .findCounter(COUNTERS.MISSING_FIELDS_RECORD_COUNT).getValue(), counters
+        .findCounter(COUNTERS.NULL_OR_EMPTY).getValue());
 
     System.exit(code);
 

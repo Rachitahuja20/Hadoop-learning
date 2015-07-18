@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.003" errors="0" skipped="0" tests="1" name="com.aamend.hadoop.MapReduce.AppTest">
+<testsuite failures="0" time="0.007" errors="0" skipped="0" tests="1" name="com.aamend.hadoop.MapReduce.AppTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Libraries"/>
@@ -27,7 +27,7 @@
 "/>
     <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
     <property name="os.name" value="Mac OS X"/>
-    <property name="classworlds.conf" value="/Users/ahuja/Documents/workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf7493837752447921626.tmp"/>
+    <property name="classworlds.conf" value="/Users/ahuja/Documents/workspace/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf384673435513060240.tmp"/>
     <property name="sun.jnu.encoding" value="MacRoman"/>
     <property name="java.library.path" value=".:/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -65,5 +65,5 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.003" classname="com.aamend.hadoop.MapReduce.AppTest" name="testApp"/>
+  <testcase time="0.007" classname="com.aamend.hadoop.MapReduce.AppTest" name="testApp"/>
 </testsuite>

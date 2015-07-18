@@ -53,3 +53,8 @@ MR job to Filter the records for the country name and its adjusted net national 
 
 O/P : Output record with country name and its adjusted net national income per capita (current US$) for the year 2010. 
 Note: The input file should be in foo.*format*.gz format.
+
+#Map reduce Assignment by Sandeep 
+MR job to parse an APache Log file and count the number of time a status code appears. 
+  <i>Using a Counter
+  <i>Using a Reducer

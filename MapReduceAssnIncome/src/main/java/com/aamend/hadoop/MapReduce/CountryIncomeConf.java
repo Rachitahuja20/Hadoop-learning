@@ -8,9 +8,8 @@ import java.net.URI;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.DoubleWritable;
 import org.apache.hadoop.io.IOUtils;
-import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.compress.CompressionCodec;
 import org.apache.hadoop.io.compress.CompressionCodecFactory;
 import org.apache.hadoop.mapreduce.Counters;
@@ -62,11 +61,16 @@ public class CountryIncomeConf {
 
     // Setup MapReduce
     job.setMapperClass(CountryIncomeMapper.class);
+    job.setPartitionerClass(SecondarySortBasicPartitioner.class);
+
+    job.setGroupingComparatorClass(SecondarySortBasicGroupingComparator.class);
+    job.setSortComparatorClass(SecondarySortBasicCompKeySortComparator.class);
+    job.setReducerClass(CountryIncomeReducer.class);
     job.setNumReduceTasks(1);
 
     // Specify key / value
-    job.setOutputKeyClass(Text.class);
-    job.setOutputValueClass(DoubleWritable.class);
+    job.setOutputKeyClass(CompositeKeyWritable.class);
+    job.setOutputValueClass(NullWritable.class);
 
     // Input
     // FileInputFormat.addInputPath(job, inputPath);
@@ -88,6 +92,7 @@ public class CountryIncomeConf {
     // Counter finding and displaying
     Counters counters = job.getCounters();
 
+    // Displaying counters
     System.out.printf("Missing Fields: %d, Error Count: %d\n", counters
         .findCounter(COUNTERS.MISSING_FIELDS_RECORD_COUNT).getValue(), counters
         .findCounter(COUNTERS.NULL_OR_EMPTY).getValue());

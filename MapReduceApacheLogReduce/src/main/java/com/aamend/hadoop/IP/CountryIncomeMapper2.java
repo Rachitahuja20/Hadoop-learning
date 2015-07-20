@@ -39,6 +39,7 @@ public class CountryIncomeMapper2 extends
   String seperator = "\t";
   DatabaseReader reader;
 
+
   @Override
   public void setup(Context context)
 
@@ -64,7 +65,7 @@ public class CountryIncomeMapper2 extends
 
     if (line == null | !!line.toString().isEmpty()) {
       logger.info("null found.");
-      context.getCounter(COUNTERS.NULL_OR_EMPTY).increment(1);
+      context.getCounter(COUNTERS1.NULL_OR_EMPTY).increment(1);
       return;
     }
 
@@ -98,14 +99,21 @@ public class CountryIncomeMapper2 extends
       }
 
       Country country = response.getCountry();
-      System.out.println(country.getIsoCode()); // 'US'
-      System.out.println(country.getName());
+      String count = country.getName(); // 'US'
+
+      if (country.getName() == null) {
+        return;
+      }
 
       logger.info(response.getCity() + ", " + country.getName() + ", "
           + country.getIsoCode());
+      IntWritable ONE = new IntWritable(1);
+
+      context.write(new Text(count), ONE);
 
     } else
-      context.getCounter(COUNTERS.MISSING_FIELDS_RECORD_COUNT).increment(1);
+      context.getCounter(COUNTERS1.MISSING_FIELDS_RECORD_COUNT)
+          .increment(1);
 
   }
 }

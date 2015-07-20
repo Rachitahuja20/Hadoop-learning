@@ -21,6 +21,7 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
+
 public class CountryIncomeConf2 {
 
   public static void main(String[] args) throws IOException,
@@ -65,6 +66,7 @@ public class CountryIncomeConf2 {
 
     // Setup MapReduce
     job.setMapperClass(CountryIncomeMapper2.class);
+    job.setReducerClass(CountryIncomeReducer2.class);
     job.setNumReduceTasks(1);
 
     // Specify key / value
@@ -92,8 +94,8 @@ public class CountryIncomeConf2 {
 
     // Displaying counters
     System.out.printf("Missing Fields: %d, Error Count: %d\n", counters
-        .findCounter(COUNTERS.MISSING_FIELDS_RECORD_COUNT).getValue(), counters
-        .findCounter(COUNTERS.NULL_OR_EMPTY).getValue());
+        .findCounter(COUNTERS1.MISSING_FIELDS_RECORD_COUNT).getValue(), counters
+        .findCounter(COUNTERS1.NULL_OR_EMPTY).getValue());
 
     System.exit(code);
 
